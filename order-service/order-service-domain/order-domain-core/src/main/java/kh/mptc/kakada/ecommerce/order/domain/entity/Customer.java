@@ -2,22 +2,12 @@ package kh.mptc.kakada.ecommerce.order.domain.entity;
 
 import kh.mptc.kakada.ecommerce.domain.entity.AggregateRoot;
 import kh.mptc.kakada.ecommerce.domain.valueobject.CustomerId;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 public class Customer extends AggregateRoot<CustomerId> {
     private final String username;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public String getGivenName() {
-        return givenName;
-    }
-
     private final String familyName;
     private final String givenName;
 
@@ -28,6 +18,14 @@ public class Customer extends AggregateRoot<CustomerId> {
         givenName = builder.givenName;
     }
 
+    public String getUsername() { return username; }
+    public String getFamilyName() { return  familyName; }
+    public String getGivenName() { return givenName; }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static final class Builder {
         private CustomerId id;
         private String username;
@@ -35,10 +33,6 @@ public class Customer extends AggregateRoot<CustomerId> {
         private String givenName;
 
         private Builder() {
-        }
-
-        public static Builder builder() {
-            return new Builder();
         }
 
         public Builder id(CustomerId val) {

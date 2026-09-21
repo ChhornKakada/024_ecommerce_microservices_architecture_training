@@ -16,6 +16,39 @@ public class Order extends AggregateRoot<OrderId> {
 
     // normally. tracking is set after creating Order
     private TrackingId trackingId;
+
+    public CustomerId getCustomerId() {
+        return customerId;
+    }
+
+    public BusinessId getBusinessId() {
+        return businessId;
+    }
+
+    public StreetAddress getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public Money getPrice() {
+        return price;
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public TrackingId getTrackingId() {
+        return trackingId;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public List<String> getFailureMessages() {
+        return failureMessages;
+    }
+
     private OrderStatus orderStatus;
     private List<String> failureMessages;
 
