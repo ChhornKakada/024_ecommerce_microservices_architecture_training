@@ -15,6 +15,7 @@
         <module>common-starter</module>
         <module>common-domain</module>
         <module>common-restapi</module>
+        <module>common-persistence</module>
     </modules>
 
     <properties>

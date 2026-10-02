@@ -14,6 +14,10 @@
     <dependencies>
         <dependency>
             <groupId>kh.mptc.kakada</groupId>
+            <artifactId>common-persistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>kh.mptc.kakada</groupId>
             <artifactId>order-application-service</artifactId>
         </dependency>
         <dependency>

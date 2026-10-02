@@ -1,4 +1,4 @@
-package kh.mptc.kakada.ecommerce.order.persistence.exception;
+package kh.mptc.kakada.ecommerce.persistence.business.exception;
 
 public class BusinessPersistenceException extends  RuntimeException {
     public BusinessPersistenceException(String message) {

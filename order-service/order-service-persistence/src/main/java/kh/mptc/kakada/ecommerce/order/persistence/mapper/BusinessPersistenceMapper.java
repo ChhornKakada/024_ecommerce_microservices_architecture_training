@@ -6,7 +6,7 @@ import kh.mptc.kakada.ecommerce.domain.valueobject.ProductId;
 import kh.mptc.kakada.ecommerce.order.domain.entity.Business;
 import kh.mptc.kakada.ecommerce.order.domain.entity.Product;
 import kh.mptc.kakada.ecommerce.order.persistence.entity.BusinessEntity;
-import kh.mptc.kakada.ecommerce.order.persistence.exception.BusinessPersistenceException;
+import kh.mptc.kakada.ecommerce.persistence.business.exception.BusinessPersistenceException;
 import org.mapstruct.Mapper;
 
 import java.util.List;
