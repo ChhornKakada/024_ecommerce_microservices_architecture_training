@@ -1,0 +1,95 @@
+server:
+  port: 8585
+
+scalar:
+  sources:
+    - title: Order Service
+      url: /order-service/v3/api-docs
+    - title: Customer Service
+      url: /customer-service/v3/api-docs
+    - title: Business Service
+      url: /business-service/v3/api-docs
+    - title: Payment Service
+      url: /payment-service/v3/api-docs
+    - title: User Service
+      url: /user-service/v3/api-docs
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Order Service
+        url: /order-service/v3/api-docs
+      - name: Customer Service
+        url: /customer-service/v3/api-docs
+      - name: Business Service
+        url: /business-service/v3/api-docs
+      - name: Payment Service
+        url: /payment-service/v3/api-docs
+      - name: User Service
+        url: /user-service/v3/api-docs
+
+spring:
+  application:
+    name: gateway-service
+  profiles:
+    active: dev
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:9090/realms/ecommerce
+        registration:
+          ecommerce-postman:
+            provider: keycloak
+            client-id: ecommerce-postman
+            #client-secret: [ client_secret_in_keycloak ]
+            redirect-uri: http://localhost:8585/login/oauth2/code/ecommerce-postman
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - profile
+              - email
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true # enable to work with nacos service discovery
+              lower-case-service-id: true
+          trusted-proxies: ".*"
+#          Global Filter
+          default-filters:
+            - SaveSession
+            - TokenRelay=
+#          routes:
+#            - id: vuejs
+#              uri: http://[::1]:5173 # http://localhost:5173
+#              predicates:
+#                - Path=/**
+    #          routes:
+#            - id: order-service
+#              uri: lb://order-service
+#              predicates:
+#                - Path=/mptc-order-service-of-kakada/**
+#              filters:
+#                - RewritePath=/mptc-order-service-of-kakada/?(?<segment>.*), /$\{segment}
+    nacos:
+      discovery:
+        namespace: ${spring.profiles.active}
+      username: nacos
+      password: qwer
+      server-addr: 127.0.0.1:8848
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'health,info,gateway'
+  endpoint:
+    gateway:
+      access: read_only

@@ -22,6 +22,12 @@
         <module>business-service</module>
         <module>customer-service</module>
         <module>payment-service</module>
+        <module>gateway-service</module>
+        <module>user-service</module>
+        <module>user-service/user-main</module>
+        <module>user-service/user-controller</module>
+        <module>user-service/user-entity</module>
+        <module>user-service/user-biz</module>
     </modules>
 
     <properties>
@@ -145,6 +151,27 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>kh.mptc.kakada</groupId>
+                <artifactId>user-main</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>kh.mptc.kakada</groupId>
+                <artifactId>user-controller</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>kh.mptc.kakada</groupId>
+                <artifactId>user-biz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>kh.mptc.kakada</groupId>
+                <artifactId>user-entity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- Spring Cloud  -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

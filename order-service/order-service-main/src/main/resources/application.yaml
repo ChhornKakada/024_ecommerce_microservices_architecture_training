@@ -1,18 +1,30 @@
 # Change order service running port
 server:
-  port: 0
+  port: 51299
+  forward-headers-strategy: framework
 spring:
   application:
     name: order-service
   profiles:
     active: dev
+  config:
+    import:
+      - nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
   cloud:
     nacos:
+      config:
+        file-extension: yaml
+        namespace: ${spring.profiles.active}
       discovery:
         namespace: ${spring.profiles.active}
       username: nacos
       password: qwer
       server-addr: 127.0.0.1:8848
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/ecommerce
   datasource:
     driver-class-name: org.postgresql.Driver
     username: ecommerce_usr

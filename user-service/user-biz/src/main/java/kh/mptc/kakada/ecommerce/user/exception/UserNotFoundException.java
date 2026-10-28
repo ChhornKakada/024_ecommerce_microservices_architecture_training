@@ -1,0 +1,10 @@
+package kh.mptc.kakada.ecommerce.user.exception;
+
+import kh.mptc.kakada.ecommerce.restapi.exception.GlobalException;
+import org.springframework.http.HttpStatus;
+
+public class UserNotFoundException extends GlobalException {
+    public UserNotFoundException(HttpStatus status, String message) {
+        super(status, message);
+    }
+}
