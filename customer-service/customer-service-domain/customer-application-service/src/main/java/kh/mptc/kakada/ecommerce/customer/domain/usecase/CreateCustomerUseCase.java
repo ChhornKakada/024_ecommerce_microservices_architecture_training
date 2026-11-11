@@ -1,8 +1,12 @@
 package kh.mptc.kakada.ecommerce.customer.domain.usecase;
 
+import feign.FeignException;
+import kh.mptc.kakada.ecommerce.customer.client.dto.UserResponse;
+import kh.mptc.kakada.ecommerce.customer.client.feign.UserFeignClient;
 import kh.mptc.kakada.ecommerce.customer.domain.dto.CreateCustomerCommand;
 import kh.mptc.kakada.ecommerce.customer.domain.dto.CreateCustomerResult;
 import kh.mptc.kakada.ecommerce.customer.domain.exception.CustomerAlreadyExistsException;
+import kh.mptc.kakada.ecommerce.customer.domain.exception.CustomerDomainException;
 import kh.mptc.kakada.ecommerce.customer.domain.mapper.CustomerDataMapper;
 import kh.mptc.kakada.ecommerce.customer.domain.port.output.CustomerRepository;
 import kh.mptc.kakada.ecommerce.customer.domain.entity.Customer;
@@ -25,9 +29,19 @@ public class CreateCustomerUseCase {
     private final CustomerRepository customerRepository;
     private final CustomerDataMapper customerDataMapper;
 
+    private final UserFeignClient userFeignClient;
+
     @Transactional // everything below runs in one DB transaction: if anything fails, nothing is saved
     public CreateCustomerResult execute(CreateCustomerCommand createCustomerCommand) {
+
         log.info("Execute CreateCustomerUseCase : {}", createCustomerCommand);
+
+        try {
+            UserResponse userResponse = userFeignClient.getById(createCustomerCommand.userId());
+            log.info("customer" + userResponse);
+        } catch (FeignException.NotFound e) {
+            throw new CustomerDomainException("User not found");
+        }
 
         if (customerRepository.existsByUsername(createCustomerCommand.username())) {
             throw new CustomerAlreadyExistsException("Username already exists");

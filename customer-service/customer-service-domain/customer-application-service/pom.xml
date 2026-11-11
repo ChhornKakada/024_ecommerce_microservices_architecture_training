@@ -28,6 +28,9 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>kh.mptc.kakada</groupId>
+            <artifactId>customer-service-client</artifactId>
+        </dependency>
     </dependencies>
-
 </project>
